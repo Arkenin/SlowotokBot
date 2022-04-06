@@ -1,0 +1,9 @@
+{% extends "bot/layout.html" %}
+
+{% block body %}
+        <h1>SłowotokBot - results</h1>
+
+        {% if letters %}
+        Here are your letters: {{ letters.upper }}
+        {% endif %}
+{% endblock %}
