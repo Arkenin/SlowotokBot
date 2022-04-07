@@ -3,12 +3,17 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django import forms
 
+from bot.utils import Solver
+
+solver = Solver()
+
 class LettersForm(forms.Form):
     letters = forms.CharField(label="Enter your letters")
 
 def results(request):
     return render(request, "bot/results.html", {
-        "letters": request.session["letters"]
+        "letters": request.session["letters"],
+        "words": request.session["words"],
     })
 
 def greet(request, name):
@@ -35,7 +40,9 @@ def index(request):
             task = form.cleaned_data["letters"]
             # run some code
             out = task.lower()
+            words = set(solver.solve(out))
             request.session["letters"] = out
+            request.session["words"] = sorted(words, key=len, reverse=True)
 
             # Redirect user to list of words
             return HttpResponseRedirect(reverse("results"))
