@@ -4,7 +4,8 @@ import re
 class Solver():
 
     def __init__(self):
-        self.all_words = set(word.rstrip('\n') for word in open('C:/Users/arkni/Desktop/Pracka/PY - kodowanie/2022/slowotok/slowa.txt'))
+        #self.all_words = set(word.rstrip('\n') for word in open('C:/Users/arkni/Desktop/Pracka/PY - kodowanie/2022/slowotok/slowa.txt'))
+        self.all_words = set(word.rstrip('\n') for word in open('data/selected.txt'))
 
     def splitter(self, text, n = 4):
         return [text[i:i+n] for i in range(0,len(text),n)]

@@ -1,5 +1,6 @@
 # VS code debug configurations
 # launch.json
+*.csv
 
 # Database
 *.sqlite3
