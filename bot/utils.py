@@ -5,7 +5,7 @@ class Solver():
 
     def __init__(self):
         #self.all_words = set(word.rstrip('\n') for word in open('C:/Users/arkni/Desktop/Pracka/PY - kodowanie/2022/slowotok/slowa.txt'))
-        self.all_words = set(word.rstrip('\n') for word in open('data/selected.txt'))
+        self.all_words = set(word.rstrip('\n') for word in open('data/selected.txt', encoding='utf8'))
 
     def splitter(self, text, n = 4):
         return [text[i:i+n] for i in range(0,len(text),n)]
@@ -46,11 +46,9 @@ class Solver():
         yield from solve()
 
 # Print a maximal-length word and its path:
-
-'''
-solver = Solver()
-lista = list(solver.solve('JNPJYYJEPZSRAWFT'.lower()))
-print(sorted(lista, key=len, reverse=True))
-
-pass
-'''
+debug = 0
+if debug:
+    solver = Solver()
+    lista = list(solver.solve('NJJAOTAEŚSDDĆTON'.lower()))
+    print(sorted(lista, key=len, reverse=True))
+    pass
