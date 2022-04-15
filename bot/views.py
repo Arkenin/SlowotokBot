@@ -8,7 +8,7 @@ from bot.utils import Solver
 solver = Solver()
 
 class LettersForm(forms.Form):
-    letters = forms.CharField(label="Enter your letters")
+    letters = forms.CharField(label = '')
 
 def results(request):
     return render(request, "bot/results.html", {
