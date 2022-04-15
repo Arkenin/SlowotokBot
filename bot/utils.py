@@ -8,6 +8,10 @@ class Solver():
         self.all_words = set(word.rstrip('\n') for word in open('data/selected.txt', encoding='utf8'))
 
     def splitter(self, text, n = 4):
+        mod = len(text) % 4
+        if mod:
+            num = n - mod
+            text = text + '?' * num
         return [text[i:i+n] for i in range(0,len(text),n)]
 
     def solve(self, letters):
