@@ -1,12 +1,14 @@
 {% extends "bot/layout.html" %}
 
-{% block body %}
-        <h1>SłowotokBot</h1>
-        <h3>Please enter your letters</h3>
-        <form action="{% url 'index' %}" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit">
-        </form>
+{% block body %}    
 
+  <div class="text-center my-auto">
+    <h1 class="mt-4">SłowotokBot</h1>
+    <p class="lead">Proszę wpisać swoje litery:</p>
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit">
+    </form>
+  </div>
 {% endblock %}

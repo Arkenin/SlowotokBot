@@ -1,18 +1,58 @@
 {% extends "bot/layout.html" %}
+{% load static %}
 
 {% block body %}
-        <h1>SłowotokBot - results</h1>
+        <div class="d-flex align-items-start">
+            
+            <div class="cover-container d-flex h-100 w-90 p-3 flex-column">
+                {% if letters %}
+                <p class="lead">Hej! To Twoje litery: <strong>{{ letters.upper }}</strong></p>
+                {% endif %}
+                {% if words %}
+                <div>
+                    <h3>Wynik:</h3>
+                </div>
+                <div>
+                    {% for word in words %}
+                    <nobr>({{ word|length }}) {{ word }}, </nobr>
+                    {% endfor %}
+                </div>
 
-        {% if letters %}
-        Here are your letters: {{ letters.upper }}
-        {% endif %}
+                    
+                {% endif %}
+            </div>
+            <div class="cover-container d-flex h-100 w-90 p-3 flex-column">
+                {% if letters %}
+                <p class="lead"> Tip: Wciśnij <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>J</kbd> aby otworzyć konsolę</strong></p>
+                {% endif %}
 
-        {% if words %}
-        <h3>Results:</h3>
-            {% for word in words %}
-                {{ word }}<br>
-            {% endfor %}
-        {% endif %}
+                <div>
+                    <h3>Przetestuj wszystkie słowa wklejając ten kod do konsoli!</h3>
+                    
+                </div>
+                {% if words %}
+                <div style="background-color: rgb(40,44,52);">
+                    <code >
+                        words = [
+                        {% for word in words %}
+                        "{{ word }}", 
+                        {% endfor %}
+                        ]<br>
+                        
+                        for (i = 0; i < words.length; i++) { <br>
+                            checkWord(words[i].toUpperCase());}
+                    </code>
+                    
+                </div>
+                <div class="py-3">
+                    <p><img src="{% static 'bot/console.png' %}" class="img-fluid" alt="Responsive image"></p>
+                </div>
+                {% endif %}
+
+                    
+            </div>
+
+        </div>
 
         
 {% endblock %}
