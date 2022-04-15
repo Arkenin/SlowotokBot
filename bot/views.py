@@ -6,12 +6,13 @@ from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
 
 from bot.utils import Solver
-from .models import User
+from .models import User, Search
+from datetime import datetime
 
 solver = Solver()
 
 class LettersForm(forms.Form):
-    letters = forms.CharField(label = '')
+    letters = forms.CharField(label = '', max_length=32)
 
 def results(request):
     return render(request, "bot/results.html", {
@@ -27,8 +28,10 @@ def greet(request, name):
 def index(request):
 
     if "letters" not in request.session:
-
         request.session["letters"] = None
+    if "counter" not in request.session:
+        request.session["counter"] = 2
+    
 
     # Check if method is POST
     if request.method == "POST":
@@ -46,6 +49,16 @@ def index(request):
             words = set(solver.solve(out))
             request.session["letters"] = out
             request.session["words"] = sorted(words, key=len, reverse=True)
+            if request.user.is_anonymous:
+                user = None
+            else:
+                user = request.user
+            search = Search(
+                    letters = out,
+                    date = datetime.today(),
+                    user = user,
+                    )
+            search.save()
 
             # Redirect user to list of words
             return HttpResponseRedirect(reverse("results"))
