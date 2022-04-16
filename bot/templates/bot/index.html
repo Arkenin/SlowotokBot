@@ -10,5 +10,8 @@
         {{ form }}
         <input type="submit">
     </form>
+    {% if message %}
+    <div>{{ message }}</div>
+    {% endif %}
   </div>
 {% endblock %}

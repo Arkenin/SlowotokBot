@@ -40,7 +40,10 @@ def index(request):
         form = LettersForm(request.POST)
 
         # Check if form data is valid (server-side)
-        if form.is_valid():
+        if form.is_valid() and (request.user.is_authenticated or request.session["counter"] > 0):
+
+            if request.user.is_anonymous:
+                request.session["counter"] -= 1
 
             # Isolate the task from the 'cleaned' version of form data
             task = form.cleaned_data["letters"]
@@ -64,10 +67,13 @@ def index(request):
             return HttpResponseRedirect(reverse("results"))
 
         else:
+            if request.session["counter"] <= 0:
+                message = 'Limit osiągnięty. Prosimy się zalogować, aby móc wyszukać więcej słów'
 
             # If the form is invalid, re-render the page with existing information.
             return render(request, "bot/index.html", {
-                "form": LettersForm
+                "form": LettersForm,
+                "message": message,
             })
 
     return render(request, "bot/index.html", {
