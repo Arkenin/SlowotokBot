@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile
     command: sh -c "python manage.py makemigrations &&
                     python manage.py migrate && 
-                    python manage.py collectstatic &&
+                    python manage.py collectstatic --noinput &&
                     gunicorn -c config/prod.py"
     expose:
       - 8000
@@ -30,8 +30,9 @@ services:
     env_file:
       - ./.env.dev
     volumes:
-      - /data/:/data/
+      - ./data/:/home/app/service/data/
       - static_volume:/home/app/service/staticfiles
 
 volumes:
   static_volume:
+  database:
