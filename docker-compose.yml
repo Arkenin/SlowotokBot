@@ -2,6 +2,18 @@
 version: '3'
 
 services:
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8001:80
+    volumes:
+      - static_volume:/home/app/service/staticfiles
+    depends_on:
+      - web
+    restart: "on-failure"
+
+
   web:
     build:
       context: .
@@ -10,11 +22,16 @@ services:
                     python manage.py migrate && 
                     python manage.py collectstatic &&
                     gunicorn -c config/prod.py"
-    ports:
-      - 8001:8000
+    expose:
+      - 8000
+    restart: "on-failure"
+#    ports:
+#      - 8001:80
     env_file:
       - ./.env.dev
     volumes:
       - /data/:/data/
+      - static_volume:/home/app/service/staticfiles
 
-
+volumes:
+  static_volume:

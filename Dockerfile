@@ -30,5 +30,5 @@ RUN pip install -r requirements.txt
 # copy project
 COPY . .
 
-RUN chown -R app:app $SERVICE
-USER app
+#RUN chown -R app:app $SERVICE
+#USER app
