@@ -1,5 +1,9 @@
+# Environment variables
+.env
+
 # VS code debug configurations
 # launch.json
+
 *.csv
 
 # Database

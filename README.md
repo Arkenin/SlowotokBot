@@ -21,12 +21,30 @@ Aby uruchomić aplikację należy użyć Dockera wraz z pakietem docker-compose.
 Moduły, które są wykorzystywane przez python wylistowane są w pliku requirements.txt
 
 ## Uruchamianie
+1. Sklonuj repozytorium
 
+```sh
+clone https://github.com/Arkenin/SlowotokBot.git
+```
+
+2. Skopiuj plik .env.sample z nazwą .env i dokonaj korekcji ustawień:
+```sh
+cd SlowotokBot
+mv .env.sample .env
+vi .env
+# ustawienie sekretnego klucza django i zaufanych domen
+```
+
+3. Zbuduj i uruchom kontenery:
 ```sh
 docker-compose build
 docker-compose up
 ```
 
+Możesz dodać administratora wpisując:
+```sh
+docker-compose exec web python manage.py createsuperuser
+```
 ## Prezentacja
 
 ![Image](/static/github/1.png)
