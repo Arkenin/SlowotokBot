@@ -28,19 +28,20 @@
 
                 <div>
                     <h3>Przetestuj wszystkie słowa wklejając ten kod do konsoli!</h3>
-                    
                 </div>
+                
                 {% if words %}
                 <div style="background-color: rgb(40,44,52);">
-                    <code >
+                    <code>
                         words = [
                         {% for word in words %}
                         "{{ word }}", 
                         {% endfor %}
-                        ]<br>
-                        
-                        for (i = 0; i < words.length; i++) { <br>
-                            checkWord(words[i].toUpperCase());}
+                        ]
+                        <br>
+                        <br>for (i = 0; i < words.length; i++) {
+                        <br>gl_letters = words[i].toUpperCase().split('')
+                        <br>checkWord(words[i].toUpperCase());}
                     </code>
                     
                 </div>

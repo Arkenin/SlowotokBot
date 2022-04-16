@@ -1,5 +1,12 @@
 
 import re
+import random
+
+def generate_letters(n = 16):
+    options = 'AIOEZNRWSTCYKDPMUJLŁBGĘHĄÓŻŚĆFŃQŹVX'
+    weights = [3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.3, 0.3, 0.3, 0.3, 0.3]
+    letters = random.choices(options, k=n, weights=weights)
+    return "".join(letters)
 
 class Solver():
 

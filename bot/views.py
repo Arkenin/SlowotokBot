@@ -5,7 +5,7 @@ from django import forms
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
 
-from bot.utils import Solver
+from bot.utils import Solver, generate_letters
 from .models import User, Search
 from datetime import datetime
 
@@ -31,7 +31,7 @@ def index(request):
         request.session["letters"] = None
     if "counter" not in request.session:
         request.session["counter"] = 2
-    
+    suggestion = generate_letters()
 
     # Check if method is POST
     if request.method == "POST":
@@ -62,23 +62,22 @@ def index(request):
                     user = user,
                     )
             search.save()
-
             # Redirect user to list of words
             return HttpResponseRedirect(reverse("results"))
-
         else:
             if request.session["counter"] <= 0:
                 message = 'Limit osiągnięty. Prosimy się zalogować, aby móc wyszukać więcej słów'
-
             # If the form is invalid, re-render the page with existing information.
             return render(request, "bot/index.html", {
                 "form": LettersForm,
+                "suggestion" :suggestion,
                 "message": message,
             })
 
     return render(request, "bot/index.html", {
         "form": LettersForm(),
         "letters": request.session["letters"],
+        "suggestion" : suggestion,
     })
 
 def login_view(request):

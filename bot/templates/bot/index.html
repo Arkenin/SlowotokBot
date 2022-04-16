@@ -10,8 +10,11 @@
         {{ form }}
         <input type="submit">
     </form>
+    <p class="">Nie masz pomysłu? Weź jeden od nas:</p>
+    <div>{{ suggestion }}</div>
+
     {% if message %}
-    <div>{{ message }}</div>
+    <a href="{% url 'login' %}">{{ message }}</a>
     {% endif %}
   </div>
 {% endblock %}
