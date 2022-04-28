@@ -15,5 +15,6 @@ class Search(models.Model):
                              blank = True,
                              null = True,
                              related_name="user_search")
+    ip = models.CharField(max_length=32, blank = True, null = True,)
     def __str__(self) -> str:
-        return f'{self.user}: {self.letters}'
+        return f'{self.date.strftime("%Y-%m-%d %H:%M")}: {self.user}, {self.letters}, IP: {self.ip}'

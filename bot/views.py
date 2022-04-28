@@ -30,7 +30,7 @@ def index(request):
     if "letters" not in request.session:
         request.session["letters"] = None
     if "counter" not in request.session:
-        request.session["counter"] = 2
+        request.session["counter"] = 1
     suggestion = generate_letters()
 
     # Check if method is POST
@@ -60,6 +60,7 @@ def index(request):
                     letters = out,
                     date = datetime.today(),
                     user = user,
+                    ip = request.META.get('HTTP_X_FORWARDED_FOR')
                     )
             search.save()
             # Redirect user to list of words
