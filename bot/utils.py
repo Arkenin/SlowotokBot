@@ -15,6 +15,7 @@ class Solver():
         self.all_words = set(word.rstrip('\n') for word in open('data/selected.txt', encoding='utf8'))
 
     def splitter(self, text, n = 4):
+        text = text.replace(' ', '')
         mod = len(text) % 4
         if mod:
             num = n - mod

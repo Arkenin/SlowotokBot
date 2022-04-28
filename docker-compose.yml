@@ -11,7 +11,7 @@ services:
       - static_volume:/home/app/service/staticfiles
     depends_on:
       - web
-    restart: "on-failure"
+    restart: "always"
 
 
   web:
@@ -24,7 +24,7 @@ services:
                     gunicorn -c config/prod.py"
     expose:
       - 8000
-    restart: "on-failure"
+    restart: "always"
 #    ports:
 #      - 8001:80
     env_file:
