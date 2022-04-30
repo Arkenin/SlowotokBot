@@ -12,7 +12,7 @@ class Solver():
 
     def __init__(self):
         #self.all_words = set(word.rstrip('\n') for word in open('C:/Users/arkni/Desktop/Pracka/PY - kodowanie/2022/slowotok/slowa.txt'))
-        self.all_words = set(word.rstrip('\n') for word in open('data/selected.txt', encoding='utf8'))
+        self.all_words = set(word.rstrip('\n') for word in open('data/selected_2.txt', encoding='utf8'))
 
     def splitter(self, text, n = 4):
         text = text.replace(' ', '')
